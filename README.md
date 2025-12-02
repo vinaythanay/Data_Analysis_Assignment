@@ -15,9 +15,8 @@ Data_Analyst_Assignment/
 │   └── 04_Clinic_Queries.sql
 │
 ├── Python/
-│   ├── 01_Time_Converter.py
-│   ├── 02_Remove_Duplicates.py
-│   └── 03_Merge_Tickets_Feedbacks.py
+│   ├── 01_Time_Converter.py│  
+│   └── 02_Remove_Duplicates.py
 │
 ├── Spreadsheets/
 │   └── Ticket_Analysis.xlsx
@@ -105,18 +104,6 @@ Example: `"mississippi"` → `"misp"`
 
 ---
 
-### **03_Merge_Tickets_Feedbacks.py**
-
-- Reads ticket & feedback Excel/CSV
-- Merges using `cms_id`
-- Computes:
-  - `ticket_created_at`
-  - `same_day?`
-  - `same_hour?`
-- Outputs `final_output.xlsx`
-
----
-
 ## 📗 Excel Workbook — Ticket_Analysis.xlsx
 
 ### **Sheet 1 — ticket**
@@ -186,7 +173,6 @@ Run scripts:
 ```
 python Python/01_Time_Converter.py
 python Python/02_Remove_Duplicates.py
-python Python/03_Merge_Tickets_Feedbacks.py
 ```
 
 ---
