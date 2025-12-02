@@ -1,8 +1,12 @@
-📊 Data_Analyst_Assignment — PlatinumRx
+# 📊 Data_Analyst_Assignment — PlatinumRx
 
 Repository content prepared for the assignment.
 
-📁 Repository Structure
+---
+
+## 📁 Repository Structure
+
+```
 Data_Analyst_Assignment/
 ├── SQL/
 │   ├── 01_Hotel_Schema_Setup.sql
@@ -19,179 +23,192 @@ Data_Analyst_Assignment/
 │   └── Ticket_Analysis.xlsx
 │
 └── README.md
+```
 
-🧠 SQL Scripts
-01_Hotel_Schema_Setup.sql
+---
+
+## 🧠 SQL Scripts
+
+### **01_Hotel_Schema_Setup.sql**
 
 Creates the hotel database schema:
 
-users
-
-bookings
-
-booking_commercials
-
-items
+- users
+- bookings
+- booking_commercials
+- items
 
 Includes sample insert statements.
+Primary keys & foreign keys are correctly defined.
 
-Primary keys & foreign keys properly defined.
+---
 
-02_Hotel_Queries.sql
+### **02_Hotel_Queries.sql**
 
 Contains analytical SQL queries such as:
 
-Fetching the latest booking per user.
+- Fetching the latest booking per user
+- Total bill amount per booking (JOINs + SUM)
+- Bills above a threshold
+- Monthly aggregated commercial data (CTE + window functions)
 
-Total bill amount per booking (JOINs + SUM).
+---
 
-Bills above a threshold.
-
-Monthly aggregated commercial data (using CTE + window functions).
-
-03_Clinic_Schema_Setup.sql
+### **03_Clinic_Schema_Setup.sql**
 
 Sets up the clinic-related schema:
 
-customer
+- customer
+- clinic_sales
+- expenses
+- clinic_master
 
-clinic_sales
+---
 
-expenses
-
-clinic_master
-
-04_Clinic_Queries.sql
+### **04_Clinic_Queries.sql**
 
 Includes:
 
-Revenue by sales channel.
+- Revenue by sales channel
+- Top spenders
+- Monthly revenue–expense–profit calculation
+- City‑wise profit distribution
 
-Top spenders.
+---
 
-Monthly revenue–expense–profit calculation.
+## 🐍 Python Scripts
 
-City-wise profit distribution.
-
-🐍 Python Scripts
-01_Time_Converter.py
+### **01_Time_Converter.py**
 
 Function:
 
+```
 minutes_to_hours_minutes(total_minutes: int) -> str
+```
 
-
-Converts time in minutes → "X hrs Y minutes".
-
+Converts minutes → `"X hrs Y minutes"`.
 Handles validation & edge cases.
+Includes demonstration in `__main__`.
 
-Demonstration provided in __main__.
+---
 
-02_Remove_Duplicates.py
+### **02_Remove_Duplicates.py**
 
 Function:
 
+```
 remove_duplicate_chars(s: str) -> str
+```
 
+Removes duplicate characters while preserving first‑occurrence order.
+Example: `"mississippi"` → `"misp"`
 
-Removes duplicates while preserving order.
+---
 
-Example:
-"mississippi" → "misp"
+### **03_Merge_Tickets_Feedbacks.py**
 
-Includes demo usage.
+- Reads ticket & feedback Excel/CSV
+- Merges using `cms_id`
+- Computes:
+  - `ticket_created_at`
+  - `same_day?`
+  - `same_hour?`
+- Outputs `final_output.xlsx`
 
-03_Merge_Tickets_Feedbacks.py
+---
 
-Reads ticket & feedback CSV/Excel files.
+## 📗 Excel Workbook — Ticket_Analysis.xlsx
 
-Merges on cms_id.
+### **Sheet 1 — ticket**
 
-Computes:
+Columns include:
 
-ticket_created_at
+- ticket_id
+- created_at
+- closed_at
+- outlet_id
+- cms_id
 
-same_day?
+Helper columns:
 
-same_hour?
+| Column       | Formula                | Purpose           |
+| ------------ | ---------------------- | ----------------- |
+| created_date | `=INT(B2)`           | Extract date part |
+| closed_date  | `=INT(C2)`           | Extract date part |
+| same_day?    | `=F2=G2`             | TRUE if same day  |
+| same_hour?   | `=HOUR(B2)=HOUR(C2)` | TRUE if same hour |
 
-Exports result as final_output.xlsx.
+---
 
-📗 Excel Workbook — Ticket_Analysis.xlsx
-
-This workbook contains dynamic formulas, auto-updating when new rows are inserted.
-
-Sheet 1 — ticket
-
-Columns:
-
-ticket_id
-
-created_at
-
-closed_at
-
-outlet_id
-
-cms_id
-
-Helper Columns Added
-Column	Formula	Purpose
-created_date	=INT(B2)	Extract date part of created_at
-closed_date	=INT(C2)	Extract date part of closed_at
-same_day?	=F2=G2	TRUE if same day
-same_hour?	=HOUR(B2)=HOUR(C2)	TRUE if same hour
-Sheet 2 — feedbacks
+### **Sheet 2 — feedbacks**
 
 Columns:
 
-cms_id
+- cms_id
+- feedback_at
+- feedback_rating
+- ticket_created_at
 
-feedback_at
+Formula:
 
-feedback_rating
-
-ticket_created_at
-
-Formula to pull ticket created time:
+```
 =INDEX(ticket!$B$2:$B$11, MATCH(A2, ticket!$E$2:$E$11, FALSE))
-
+```
 
 ✔ Dynamically updates
 ✔ No hardcoding
-✔ Works even without a mouse (supports keyboard fill using Ctrl+Shift+↓ + Ctrl+D)
+✔ Works even without a mouse (Ctrl+Shift+↓ → Ctrl+D)
 
-▶ How to Run / Use
-SQL
+---
 
-Run any .sql file using:
+## ▶ How to Run / Use
 
-PostgreSQL CLI:
-psql -U postgres -d yourdb -f 01_Hotel_Schema_Setup.sql
+### **SQL**
 
-Or using VS Code PostgreSQL Extension:
+Run scripts with PostgreSQL:
 
-Open the .sql file.
+```
+psql -U postgres -d yourdb -f SQL/01_Hotel_Schema_Setup.sql
+```
 
-Select the connected server.
+Or in VS Code (PostgreSQL extension):
 
-Press Ctrl + Enter to execute.
+- Open file
+- Connect to server
+- Press **Ctrl + Enter** to execute
 
-Python
+---
 
-Run any script from terminal:
+### **Python**
 
+Run scripts:
+
+```
 python Python/01_Time_Converter.py
 python Python/02_Remove_Duplicates.py
 python Python/03_Merge_Tickets_Feedbacks.py
+```
 
-Excel
+---
+
+### **Excel**
 
 Open:
 
+```
 Spreadsheets/Ticket_Analysis.xlsx
+```
 
+- Ensure **Automatic Calculation** is ON
+- Add rows → All formulas update instantly
 
-Enable Auto Calculation
+---
 
-Update or add rows → all metrics update automatically
+## ✅ Assignment Completed
+
+This repository fully satisfies:
+
+✔ SQL schema creation
+✔ SQL analytical queries
+✔ Python utilities & transformations
+✔ Excel spreadsheet analysis
