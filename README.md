@@ -15,7 +15,7 @@ Data_Analyst_Assignment/
 │   └── 04_Clinic_Queries.sql
 │
 ├── Python/
-│   ├── 01_Time_Converter.py│  
+│   ├── 01_Time_Converter.py  
 │   └── 02_Remove_Duplicates.py
 │
 ├── Spreadsheets/
